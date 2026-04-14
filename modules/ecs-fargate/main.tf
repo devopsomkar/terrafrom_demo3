@@ -12,7 +12,7 @@ resource "aws_alb" "nginx_alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [var.sg_id]
-  subnets            = [var.subnet_id] # Add more if multi-AZ
+  subnets            = var.subnet_ids
 
   enable_deletion_protection = false
 
@@ -126,7 +126,7 @@ resource "aws_ecs_service" "nginx_service" {
   desired_count   = var.ecs_desired_count
 
   network_configuration {
-    subnets          = [var.subnet_id]
+    subnets          = var.subnet_ids
     security_groups  = [var.sg_id]
     assign_public_ip = true
   }

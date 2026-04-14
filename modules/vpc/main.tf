@@ -17,7 +17,11 @@ data "aws_vpc" "default" {
   default = true
 }
 
-data "aws_subnet" "public" {
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+data "aws_subnets" "public" {
   filter {
     name   = "vpc-id"
     values = [data.aws_vpc.default.id]
@@ -27,19 +31,18 @@ data "aws_subnet" "public" {
     name   = "default-for-az"
     values = ["true"]
   }
-
-  filter {
-    name   = "availability-zone"
-    values = [var.availability_zone]
-  }
 }
 
 output "vpc_id" {
   value = data.aws_vpc.default.id
 }
 
+output "subnet_ids" {
+  value = data.aws_subnets.public.ids
+}
+
 output "subnet_id" {
-  value = data.aws_subnet.public.id
+  value = data.aws_subnets.public.ids[0]
 }
 
 output "ami_id" {
