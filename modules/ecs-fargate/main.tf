@@ -22,7 +22,7 @@ resource "aws_alb" "nginx_alb" {
 }
 
 resource "aws_lb_target_group" "nginx_tg" {
-  name_prefix   = "${var.ecs_cluster_name}-tg-"
+  name_prefix   = "ngtg-"
   port          = var.container_port
   protocol      = "HTTP"
   vpc_id        = var.vpc_id
