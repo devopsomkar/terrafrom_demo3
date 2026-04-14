@@ -1,6 +1,5 @@
 variable "ami_id" {
-  description = "AMI ID"
-  type        = string
+  type = string
 }
 
 variable "subnet_id" {
@@ -12,13 +11,15 @@ variable "sg_id" {
 }
 
 variable "instance_type" {
-  type    = string
-  default = "t3.micro"
+  type = string
 }
 
 variable "root_volume_size" {
-  type    = number
-  default = 8
+  type = number
+}
+
+variable "key_name" {
+  type = string
 }
 
 variable "dynatrace_tenant" {
@@ -26,11 +27,6 @@ variable "dynatrace_tenant" {
 }
 
 variable "dynatrace_token" {
-  type      = string
-  sensitive = true
-}
-
-variable "key_name" {
   type = string
 }
 

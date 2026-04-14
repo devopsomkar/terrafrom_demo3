@@ -11,27 +11,10 @@ resource "aws_instance" "nginx_server" {
     volume_type = "gp3"
   }
 
-  user_data = templatefile("${path.module}/user_data.sh", {
-    dynatrace_tenant = var.dynatrace_tenant
-    dynatrace_token  = var.dynatrace_token
-  })
+  user_data = file("${path.module}/user_data.sh")
 
   tags = {
-    Name        = "nginx-dynatrace-server"
-    Environment = "dev"
-    Dynatrace   = "monitored"
+    Name = "nginx-server"
   }
-}
-
-output "instance_id" {
-  value = aws_instance.nginx_server.id
-}
-
-output "public_ip" {
-  value = aws_instance.nginx_server.public_ip
-}
-
-output "public_dns" {
-  value = aws_instance.nginx_server.public_dns
 }
 

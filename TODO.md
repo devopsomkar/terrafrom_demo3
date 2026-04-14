@@ -1,22 +1,27 @@
-# Terraform EC2 + Nginx + Dynatrace TODO
+# Terraform Modular EC2 Progress
 
 ## Completed
-- [x] Create versions.tf
-- [x] Create provider.tf  
-- [x] Create variables.tf
-- [x] Create terraform.tfvars (fill your Dynatrace values!)
-- [x] Create outputs.tf
+- [x] versions.tf
+- [x] provider.tf
+- [x] variables.tf
+- [x] terraform.tfvars
+- [x] outputs.tf (fixed duplicates)
+- [x] main.tf
+- [x] Modules: vpc, security-group, ec2-instance
 
+## Completed
+- [x] Fix duplicate outputs
+- [x] Enhance Jenkinsfile 
+- [x] terraform init
+- [x] terraform validate
+
+## Next Steps
+- Fill terraform.tfvars with dynatrace_token and key_name
+- Configure Jenkins credentials: 'aws-access-key-id', 'aws-secret-access-key', 'dynatrace-token'
+- git add . && git commit -m "Fix modules and Jenkinsfile" && git push
+- Run Jenkins pipeline
 
 ## Pending
-- [x] Create main.tf (core infrastructure)
-
-- [🔄] `terraform init` (running)
-- [ ] `terraform validate`
-- [ ] `terraform plan`
-- [ ] `terraform apply` (deploys EC2 + app + monitoring)
-- [ ] Verify: curl EC2 IP for Nginx, check Dynatrace dashboard
-- [ ] Phase 2: Git + Jenkins CI/CD (git init, .gitignore, Jenkinsfile)
-
-Next step: Create main.tf
-
+- [ ] Verify EC2/Nginx/Dynatrace
+- [ ] Git push
+- [ ] Jenkins CI/CD run
