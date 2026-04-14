@@ -184,6 +184,10 @@ resource "aws_ecs_task_definition" "nginx_task" {
           name  = "LD_PRELOAD"
           value = "/opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so"
         }
+            {
+          name  = "DT_LOGLEVELCON"
+          value = "info"
+        }
       ]
 
       mountPoints = [
