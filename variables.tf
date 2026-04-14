@@ -34,7 +34,7 @@ variable "key_name" {
 }
 
 variable "dynatrace_tenant" {
-  description = "Dynatrace tenant URL"
+  description = "https://abc123.live.dynatrace.com"
   type        = string
 }
 
