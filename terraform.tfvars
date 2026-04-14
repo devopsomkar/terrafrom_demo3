@@ -3,3 +3,4 @@
 dynatrace_tenant = "https://azs89024.apps.dynatrace.com"
 dynatrace_token  = ""
 
+dynatrace_connection_point = "your-activegate-endpoint:9999"
