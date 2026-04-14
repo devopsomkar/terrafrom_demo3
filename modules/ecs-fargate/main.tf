@@ -128,14 +128,10 @@ resource "aws_ecs_task_definition" "nginx_task" {
       command = [
         "sh",
         "-c",
-        "apk add --no-cache curl unzip >/dev/null && mkdir -p /opt/dynatrace/oneagent && curl -fsSL -H \"Authorization: Api-Token tk\" \"https://azs89024.live.dynatrace.com/api/v1/deployment/installer/agent/unix/paas/latest?flavor=musl&include=nginx\" -o /tmp/oneagent.zip && unzip -o /tmp/oneagent.zip -d /opt/dynatrace/oneagent && test -f /opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so && echo Dynatrace-OneAgent-ready"
+        "apk add --no-cache curl unzip >/dev/null && mkdir -p /opt/dynatrace/oneagent && curl -fsSL -H \"Authorization: Api-Token dt0c01.JQCQRMPU27SN3NP35HZXZPVB.HIE7JD2D5MLYRIWMQ6WAF4PMJPQXYDTXCEFCWNMAB6HGZLNJM4Y6FXLRBC5VMJJA\" \"https://${local.dynatrace_tenant}.live.dynatrace.com/api/v1/deployment/installer/agent/unix/paas/latest?flavor=musl&include=nginx\" -o /tmp/oneagent.zip && unzip -o /tmp/oneagent.zip -d /opt/dynatrace/oneagent && test -f /opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so && echo Dynatrace-OneAgent-ready"
       ]
 
       environment = [
-        {
-          name  = "DT_TENANT"
-          value = local.dynatrace_tenant
-        },
         {
           name  = "DT_API_TOKEN"
           value = var.dynatrace_token
@@ -183,10 +179,18 @@ resource "aws_ecs_task_definition" "nginx_task" {
         {
           name  = "LD_PRELOAD"
           value = "/opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so"
-        }
-            {
+        },
+        {
+          name  = "DT_TENANT"
+          value = local.dynatrace_tenant
+        },
+        {
+          name  = "DT_CONNECTION_POINT"
+          value = var.dynatrace_connection_point
+        },
+        {
           name  = "DT_LOGLEVELCON"
-          value = "info"
+          value = "INFO"
         }
       ]
 
