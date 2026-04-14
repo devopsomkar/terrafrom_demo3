@@ -1,11 +1,15 @@
 #!/bin/bash
-yum update -y
-yum install -y nginx
-systemctl start nginx
-systemctl enable nginx
 
-# Dynatrace OneAgent install
-TENANT=$(curl -s "http://169.254.169.254/latest/meta-data/instance-id")
-TOKEN="${dynatrace_token}"
-curl -H "Authorization: Api-Token ${TOKEN}" -H 'Content-Type: application/json' -X PUT "https://${dynatrace_tenant}/api/v1/host/${TENANT}?keepAlive=true" -d '{"autoUpdateEnabled":true}'
+cd /tmp && \
+curl -L -H "Authorization: Api-Token dt0c01.JQCQRMPU27SN3NP35HZXZPVB.HIE7JD2D5MLYRIWMQ6WAF4PMJPQXYDTXCEFCWNMAB6HGZLNJM4Y6FXLRBC5VMJJA" \
+"https://azs89024.live.dynatrace.com/api/v1/deployment/installer/agent/unix/default/latest?arch=x86" \
+-o Dynatrace-OneAgent-Linux.sh
 
+
+ls -l /tmp/Dynatrace-OneAgent-Linux.sh
+head -5 /tmp/Dynatrace-OneAgent-Linux.sh
+file /tmp/Dynatrace-OneAgent-Linux.sh
+
+/bin/sh /tmp/Dynatrace-OneAgent-Linux.sh \
+--set-monitoring-mode=fullstack \
+--set-app-log-content-access=true
