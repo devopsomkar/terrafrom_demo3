@@ -92,33 +92,6 @@ resource "aws_ecs_task_definition" "nginx_task" {
           awslogs-stream-prefix = "ecs"
         }
       }
-    },
-    {
-      name  = "dynatrace-oneagent"
-      image = "public.ecr.aws/dynatrace/oneagent"
-      environment = [
-        {
-          name  = "DT_TENANT"
-          value = var.dynatrace_tenant
-        },
-        {
-          name  = "DT_TOKEN"
-          value = var.dynatrace_token
-        },
-        {
-          name  = "DT_CONNECTION_POINT"
-          value = var.dynatrace_tenant
-        }
-      ]
-      essential = true
-      logConfiguration = {
-        logDriver = "awslogs"
-        options = {
-          awslogs-group         = "/ecs/dynatrace"
-          awslogs-region        = "us-east-1"
-          awslogs-stream-prefix = "agent"
-        }
-      }
     }
   ])
 }
@@ -189,7 +162,3 @@ resource "aws_cloudwatch_log_group" "ecs_logs" {
   retention_in_days = 14
 }
 
-resource "aws_cloudwatch_log_group" "dynatrace_logs" {
-  name              = "/ecs/dynatrace"
-  retention_in_days = 14
-}
