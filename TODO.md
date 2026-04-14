@@ -21,7 +21,17 @@
 - git add . && git commit -m "Fix modules and Jenkinsfile" && git push
 - Run Jenkins pipeline
 
+## ECS Fargate + Dynatrace Phase
+**Defaults:** cluster_name="nginx-cluster", desired_count=1, nginx_image="nginx:alpine"
+
+**Steps:**
+1. [ ] Add ECS vars to variables.tf + terraform.tfvars
+2. [ ] Create modules/ecs-fargate/{variables.tf, main.tf, outputs.tf} (cluster, ALB, taskdef nginx+dynatrace-agent, service)
+3. [ ] Edit main.tf: Add module "ecs_fargate" call (reuse vpc/subnet/sg)
+4. [ ] Update outputs.tf: ALB dns for ECS
+5. [ ] terraform plan/apply
+6. [ ] Verify ALB URL nginx + Dynatrace metrics/logs
+
 ## Pending
-- [ ] Verify EC2/Nginx/Dynatrace
-- [ ] Git push
-- [ ] Jenkins CI/CD run
+- [x] EC2 verify (user confirmed working)
+

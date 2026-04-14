@@ -27,3 +27,18 @@ module "ec2_instance" {
   dynatrace_token    = var.dynatrace_token
 }
 
+module "ecs_fargate" {
+  source = "./modules/ecs-fargate"
+
+  vpc_id            = module.vpc.vpc_id
+  subnet_id         = module.vpc.subnet_id
+  sg_id             = module.security_group.sg_id
+  dynatrace_tenant  = var.dynatrace_tenant
+  dynatrace_token   = var.dynatrace_token
+  ecs_cluster_name  = var.ecs_cluster_name
+  ecs_desired_count = var.ecs_desired_count
+  nginx_image       = var.nginx_image
+  task_family       = var.task_family
+  container_port    = var.container_port
+}
+

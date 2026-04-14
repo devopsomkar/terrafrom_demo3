@@ -39,3 +39,33 @@ variable "dynatrace_token" {
   sensitive   = true
 }
 
+variable "ecs_cluster_name" {
+  description = "ECS Fargate cluster name"
+  type        = string
+  default     = "nginx-cluster"
+}
+
+variable "ecs_desired_count" {
+  description = "Desired number of ECS tasks"
+  type        = number
+  default     = 1
+}
+
+variable "nginx_image" {
+  description = "Nginx Docker image"
+  type        = string
+  default     = "nginx:alpine"
+}
+
+variable "task_family" {
+  description = "ECS task family"
+  type        = string
+  default     = "nginx-task"
+}
+
+variable "container_port" {
+  description = "Nginx port"
+  type        = number
+  default     = 80
+}
+
