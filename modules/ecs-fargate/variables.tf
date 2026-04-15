@@ -14,7 +14,7 @@ variable "sg_id" {
   type        = string
 }
 variable "dynatrace_tenant" {
-  description = "https://abc123.live.dynatrace.com"
+  description = "azs89024"
   type        = string
 }
 
