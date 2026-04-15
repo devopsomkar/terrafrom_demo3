@@ -3,4 +3,4 @@
 dynatrace_tenant = "azs89024"
 dynatrace_token  = ""
 
-dynatrace_connection_point = "azs89024.live.dynatrace.com "
+dynatrace_connection_point = "https://azs89024.live.dynatrace.com "
